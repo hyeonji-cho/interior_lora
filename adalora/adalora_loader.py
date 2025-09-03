@@ -209,7 +209,7 @@ class AdaLoRALoader:
                 lora_part = lora_B @ lora_AE  # (out_features, in_features)
                 
                 # AdaLoRA 영향력을 높이기 위한 스케일링 조정
-                scaling = 16.0  # 영향력 대폭 증가
+                scaling = 32.0  # 영향력 대폭 증가
                 ranknum = float(lora_A.shape[0])
                 lora_part = lora_part * scaling / (ranknum + 1e-5)
                 
