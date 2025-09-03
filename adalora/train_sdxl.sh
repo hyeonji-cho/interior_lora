@@ -31,18 +31,19 @@ V="boisversionsrai"
 
 accelerate launch "$EXAMPLES_DIR/train_dreambooth_lora_sdxl.py" \
   --pretrained_model_name_or_path "stabilityai/stable-diffusion-xl-base-1.0" \
-  --instance_data_dir "./train_dataset/south_30" \
-  --output_dir "./final-lora-weight/adalora_south_30" \
-  --instance_prompt "a ${V} style interior room" \
+  --instance_data_dir "./train_dataset/gpt_tropical" \
+  --output_dir "./final-lora-weight/adalora_gpt_tropical_rank_16" \
+  --instance_prompt "a ${V} style interior" \
   --resolution 768 \
   --train_batch_size 2 \
   --gradient_accumulation_steps 2 \
-  --max_train_steps 5000 \
-  --rank 16 \
+  --max_train_steps 10000 \
+  --rank 32 \
   --mixed_precision fp16 \
   --enable_xformers_memory_efficient_attention \
   --checkpointing_steps 1000 \
-  --checkpoints_total_limit 3 \
+  --checkpoints_total_limit 10 \
   --learning_rate 1e-4 \
-  --target_rank 8 \
-  --use_adalora 
+  --target_rank 16 \
+  --resume_from_checkpoint "./final-lora-weight/adalora_gpt_tropical_rank_16/checkpoint-5000" \
+  --use_adalora
